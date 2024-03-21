@@ -18,8 +18,10 @@
  * logstore_socialflow
  *
  * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Modified by Zabelle Motte (UCLouvain)
  */
 
 namespace logstore_socialflow\log;
@@ -117,7 +119,6 @@ class store implements \tool_log\log\writer {
         }
 
         $records = [];
-        $eventsToTrack = [];
         foreach ($events as $event) {
             if ($logscope !== 'all' // first checking the fast option
                 && (($logscope === 'include' && !in_array($event['courseid'], $courseids))
@@ -162,9 +163,7 @@ class store implements \tool_log\log\writer {
                     continue;
                 }
             }
-     
 
-            $eventsToTrack[] = $event;
             $eventid = 0;
             $dbevent = $DB->get_record('logstore_socialflow_evts', ['eventname' => $event['eventname']], 'id');
             if ($dbevent) {
