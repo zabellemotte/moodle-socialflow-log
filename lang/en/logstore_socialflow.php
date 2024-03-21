@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for logstore_socialflow
- *
+ * logstore_socialflow settings
  * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Modified by Zabelle Motte (UCLouvain)
  */
 
 $string['pluginname'] = 'Social Flow Log';
