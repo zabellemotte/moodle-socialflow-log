@@ -42,5 +42,10 @@ $string['buffersize'] = 'buffersize';
 $string['loglifetime'] = 'Keep logs for';
 $string['configloglifetime_descr'] = 'This specifies the length of time you want to keep logs about course activity. Logs that are older than this age are automatically deleted. It is best to keep logs as long as possible, in case you need them, but if you have a very busy server and are experiencing performance problems, then you may want to lower the log lifetime. Values lower than 6 months are not recommended because statistics may not work properly.';
 
+$string['privacy:metadata:log'] = 'A collection of past events';
+$string['privacy:metadata:log:eventid'] = 'The event id';
+$string['privacy:metadata:log:timecreated'] = 'The time when the event occurred';
+$string['privacy:metadata:log:userid'] = 'The ID of the user who triggered this event';
+
 // Cleanup Task
 $string['taskcleanup'] = 'Log table cleanup';
