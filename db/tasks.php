@@ -18,8 +18,10 @@
  * Tasks for logstore_socialflow
  *
  * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Modified by Zabelle Motte (UCLouvain)
  */
 
 defined('MOODLE_INTERNAL') || die();
