@@ -16,10 +16,11 @@
 
 /**
  * logstore_socialflow settings
- *
  * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Modified by Zabelle Motte (UCLouvain)
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -65,8 +66,8 @@ if ($hassiteconfig) {
     ));
 
     $options = array(
-        30  => get_string('numweeks', '', 4),
-        15  => get_string('numweeks', '', 2 ),
+        28  => get_string('numweeks', '', 4),
+        14  => get_string('numweeks', '', 2 ),
         7  => get_string('numweeks', '', 1 )
     );
     $settings->add(new admin_setting_configselect('logstore_socialflow/loglifetime',
