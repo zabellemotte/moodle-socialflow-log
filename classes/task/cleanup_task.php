@@ -17,10 +17,11 @@
 /**
  * Scheduled cleanup task.
  *
- * @package     local_learning_analytics
+ * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ * Modified by Zabelle Motte (UCLouvain) */
 
 namespace logstore_socialflow\task;
 
@@ -60,23 +61,29 @@ class cleanup_task extends \core\task\scheduled_task {
         // Events are deleted when no event arised on the contextid during the longlifetime.
         // As far as a there are events linked to a contextid during the longlifetime, data are preserved 
         // to be able to indicate user if he had an action linked to this contextid (even if this action is outside the longlifetime).
-        $old_data = $DB->get_record_sql(
+        $old_data = $DB->get_records_sql(
     "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime 
             AND contextid NOT IN (SELECT DISTINCT contextid 
                                 FROM {logstore_socialflow_log}
                                 WHERE timecreated > $loglifetime)"  );
     if ($old_data) {
         $ids = array();
-        foreach ($old_data as $row) { 
-            $ids[] = $row[id]; 
+        foreach ($old_data as $row) {
+            $ids[] = $row->id; 
         }
-        $clauseIN = implode(', ', $ids);
-        $select = "id IN ($clauseIN)";
-        $DB->delete_records_select("logstore_socialflow_log",$select);
-        mtrace(" Deleted old log records from socialflow log store.");
+        // data suppression is chunked in several delete actions of 500 records to avoid database trashing
+        while (count($ids)>0){
+            $lids=count($ids);
+            $cids=array_slice($ids, 0, 50);
+            $ids= array_slice($ids, 50, $lids - 50);
+            $clauseIN = implode(', ', $cids);
+            $select = "id IN ($clauseIN)";
+            $DB->delete_records_select("logstore_socialflow_log",$select);
+         }
+        mtrace("Deleted old log records from socialflow log store.");
     }
     else{
-            mtrace(" No old data to delete in socialflow logs.");
+            mtrace("No old data to delete in socialflow logs.");
     }
     }
 }
