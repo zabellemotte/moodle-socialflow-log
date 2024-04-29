@@ -53,7 +53,7 @@ if ($hassiteconfig) {
         'logstore_socialflow/tracking_roles',
         get_string('setting_tracking_roles', 'logstore_socialflow'),
         get_string('setting_tracking_roles_descr', 'logstore_socialflow'),
-        '', // default value
+        'student', // default value
         PARAM_RAW
     ));
 
