@@ -80,7 +80,7 @@ class cleanup_task extends \core\task\scheduled_task {
             $select = "id IN ($clauseIN)";
             $DB->delete_records_select("logstore_socialflow_log",$select);
          }
-        mtrace("Deleted old log records from socialflow log store.");
+        mtrace("Old log records from socialflow log store deleted.");
     }
     else{
             mtrace("No old data to delete in socialflow logs.");
