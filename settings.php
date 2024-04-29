@@ -66,7 +66,6 @@ if ($hassiteconfig) {
     ));
 
     $options = array(
-        28  => get_string('numweeks', '', 4),
         14  => get_string('numweeks', '', 2 ),
         7  => get_string('numweeks', '', 1 )
     );
