@@ -28,20 +28,20 @@ $string['privacy:metadata'] = 'This plugin does not store any personal data. All
 
 // Settings
 $string['setting_log_scope'] = 'log_scope';
-$string['setting_log_scope_descr'] = 'Defines the scope of the logging process. By default, everything is logged.';
-$string['setting_log_scope_all'] = 'Log all events';
+$string['setting_log_scope_descr'] = 'Defines the scope of the logging process. By default, all courses are logged.';
+$string['setting_log_scope_all'] = 'Log events in all courses';
 $string['setting_log_scope_include'] = 'Log events only in courses specified via course_ids below';
 $string['setting_log_scope_exclude'] = 'Log events EXCLUDING the courses specified via course_ids below';
 $string['setting_course_ids'] = 'course_ids';
 $string['setting_course_ids_descr'] = 'To be used with the log_scope option "include" or "exclude" to only track specific courses. Example: <code>10,153,102</code>.';
 $string['setting_tracking_roles'] = 'tracking_roles';
-$string['setting_tracking_roles_descr'] = 'Define which roles should be tracked (whitelist). This is useful if you only want to track specific roles (like students or guests). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, all roles are tracked. Example: <code>student,guest</code>';
+$string['setting_tracking_roles_descr'] = 'Define which roles should be tracked (whitelist). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, only student role is tracked. Example: <code>student,guest</code>';
 $string['setting_nontracking_roles'] = 'nontracking_roles';
 $string['setting_nontracking_roles_descr'] = 'Define which roles should <strong>not</strong> be tracked (blacklist). This is useful if you don\'t want to track specific roles (like managers or teachers). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, all roles are tracked. Example: <code>teacher,editingteacher,manager</code>. This settings has priority over <code>tracking_roles</code>.';
 $string['buffersize'] = 'buffersize';
 
 $string['loglifetime'] = 'Keep logs for';
-$string['configloglifetime_descr'] = 'This specifies the length of time you want to keep logs about course activity. Logs that are older than this age are automatically deleted. It is best to keep logs as long as possible, in case you need them, but if you have a very busy server and are experiencing performance problems, then you may want to lower the log lifetime. Values lower than 6 months are not recommended because statistics may not work properly.';
+$string['configloglifetime_descr'] = 'This specifies the length of time you want to keep logs about course activity. Logs are suppressed once one action has no more hits during loglifetime.';
 
 $string['privacy:metadata:log'] = 'A collection of past events';
 $string['privacy:metadata:log:eventid'] = 'The event id';
