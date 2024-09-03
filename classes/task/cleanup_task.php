@@ -51,7 +51,7 @@ class cleanup_task extends \core\task\scheduled_task {
  
 
         if (empty($loglifetime) || $loglifetime < 0) {
-            return;
+            $loglifetime=14;
         }
 
         $loglifetime = time() - ($loglifetime * 3600 * 24); // Value in days.
@@ -59,10 +59,11 @@ class cleanup_task extends \core\task\scheduled_task {
         $start = time();
         
         // Events are deleted when no event arised on the contextid during the longlifetime.
-        // As far as a there are events linked to a contextid during the longlifetime, data are preserved 
-        // to be able to indicate user if he had an action linked to this contextid (even if this action is outside the longlifetime).
+        // As far as a there are events linked to a contextid during the loglifetime, data are preserved 
+        // to be able to indicate user if he had an action linked to this contextid 
+        // (even if this action is outside the loglifetime).
         $old_data = $DB->get_records_sql(
-    "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime 
+           "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime 
             AND contextid NOT IN (SELECT DISTINCT contextid 
                                 FROM {logstore_socialflow_log}
                                 WHERE timecreated > $loglifetime)"  );
