@@ -69,13 +69,6 @@ class store implements \tool_log\log\writer {
         $entry = $event->get_data();
         // add similar data as in buffered_writer to make it more compatible
         $entry['realuserid'] = \core\session\manager::is_loggedinas() ? $GLOBALS['USER']->realuser : null;
-     //   $entry['origin'] = $PAGE->requestorigin; // 'ws' (API/App), 'web', 'restore' or 'cli'
-     //   $entry['ip'] = $PAGE->requestip; // could later be used by a log to track if request is from inside or outside of specific network
-     //   if ($PAGE->requestorigin === 'ws') {
-     //       $entry['device'] = MOODLE_API;
-     //   } else {
-     //       $entry['device'] = devices::get_device();
-     //   }
 
         $this->buffer[] = $entry;
         $this->count++;
