@@ -49,4 +49,6 @@ $string['privacy:metadata:log:timecreated'] = 'The time when the event occurred'
 $string['privacy:metadata:log:userid'] = 'The ID of the user who triggered this event';
 
 // Cleanup Task
-$string['taskcleanup'] = 'Log table cleanup';
+$string['taskcleanup'] = 'Socialflow log table cleanup';
+$string['tasknbpa'] = 'Refreshing socialflow number of participants information';
+$string['taskhits'] = 'Refreshing socialflow hits informations';
