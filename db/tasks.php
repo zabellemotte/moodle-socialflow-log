@@ -30,10 +30,28 @@ $tasks = [
     [
         'classname' => '\logstore_socialflow\task\cleanup_task',
         'blocking' => 0,
-        'minute' => 'R',
-        'hour' => '4',
+        'minute' => '0',
+        'hour' => '1',
         'day' => '*',
         'dayofweek' => '*',
         'month' => '*'
-    ]
+    ],
+        [
+        'classname' => '\logstore_socialflow\task\nbpa_task',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '2',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*'
+    ],
+    [
+        'classname' => '\logstore_socialflow\task\hits_task',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '3',
+        'day' => '0',
+        'dayofweek' => '*',
+        'month' => '*'
+    ],
 ];
