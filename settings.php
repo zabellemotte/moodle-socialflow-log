@@ -61,7 +61,7 @@ if ($hassiteconfig) {
         'logstore_socialflow/nontracking_roles',
         get_string('setting_nontracking_roles', 'logstore_socialflow'),
         get_string('setting_nontracking_roles_descr', 'logstore_socialflow'),
-        '', // default value
+        'teacher,editingteacher,manager', // default value
         PARAM_RAW
     ));
 
