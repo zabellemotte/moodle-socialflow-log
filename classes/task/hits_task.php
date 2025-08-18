@@ -103,6 +103,14 @@ class hits_task extends \core\task\scheduled_task {
         $dbtype=$CFG->dbtype;
         switch ($dbtype) {
             case 'mariadb':
+                $sql1 = "INSERT INTO {logstore_socialflow_hits_temp} (contextid, eventid, courseid, nbhits, lasttime, userids)
+                              SELECT log.contextid, log.eventid, log.courseid,
+                                 COUNT(DISTINCT log.userid) AS nbhits,
+                                 MAX(log.timecreated) AS lasttime,
+                                 GROUP_CONCAT(DISTINCT log.userid ORDER BY log.userid) AS userids
+                              FROM {logstore_socialflow_log} log
+                              GROUP BY log.contextid, log.eventid, log.courseid";
+                break;
             case 'mysqli':
                 $sql1 = "INSERT INTO {logstore_socialflow_hits_temp} (contextid, eventid, courseid, nbhits, lasttime, userids)
                               SELECT log.contextid, log.eventid, log.courseid,
