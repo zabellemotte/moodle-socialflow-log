@@ -14,6 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace logstore_socialflow\log;
+
+defined('MOODLE_INTERNAL') || die();
+
+use tool_log\log\manager as log_manager;
+use tool_log\helper\store as helper_store;
+use tool_log\helper\reader as helper_reader;
+use core\event\base as event_base;
+use stdClass;
+use context_course;
+
+/**
+ * Indicates the API mode for Moodle.
+ *
+ * @var int
+ */
+const MOODLE_API = 10100;
+
+
 /**
  * logstore_socialflow
  *
@@ -23,30 +42,25 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Modified by Zabelle Motte (UCLouvain)
  */
-
-namespace logstore_socialflow\log;
-
-defined('MOODLE_INTERNAL') || die();
-
-use \tool_log\log\manager as log_manager;
-use \tool_log\helper\store as helper_store;
-use \tool_log\helper\reader as helper_reader;
-use \core\event\base as event_base;
-//use logstore_socialflow\devices;
-use stdClass;
-use \context_course;
-
-const MOODLE_API = 10100;
-
 class store implements \tool_log\log\writer {
     use helper_store;
     use helper_reader;
-    use \tool_log\helper\buffered_writer; // we are overwriting write(), see below
+    use tool_log\helper\buffered_writer; // We are overwriting write(), see below.
 
+    /**
+     * Creating the new log store
+     *
+     * @return string
+     */
     public function __construct(log_manager $manager) {
         $this->helper_setup($manager);
     }
 
+    /**
+     * Function to exclude anonymous and guest actions form log table
+     *
+     * @return string
+     */
     protected function is_event_ignored(event_base $event) {
         if ((!CLI_SCRIPT || PHPUNIT_TEST)) {
             // Always log inside CLI scripts because we do not login there.
@@ -57,9 +71,13 @@ class store implements \tool_log\log\writer {
 
         return false;
     }
-
+    /**
+     * Function adapted form buffer_writer
+     *
+     * @return string
+     */
     public function write(\core\event\base $event) {
-        // copied mostly from "tool_log\helper\buffered_writer" with some modifications
+        // Copied mostly from "tool_log\helper\buffered_writer" with some modifications.
         global $PAGE;
 
         if ($this->is_event_ignored($event)) {
@@ -67,7 +85,7 @@ class store implements \tool_log\log\writer {
         }
 
         $entry = $event->get_data();
-        // add similar data as in buffered_writer to make it more compatible
+        // Add similar data as in buffered_writer to make it more compatible.
         $entry['realuserid'] = \core\session\manager::is_loggedinas() ? $GLOBALS['USER']->realuser : null;
 
         $this->buffer[] = $entry;
@@ -81,11 +99,16 @@ class store implements \tool_log\log\writer {
         }
     }
 
+    /**
+     * Function storing events that are predefined in evts table
+     *
+     * @return string
+     */
     protected function insert_event_entries($events) {
         global $DB, $CFG;
 
         $courseids = [];
-        $logscope = get_config('logstore_socialflow', 'log_scope'); // 'all', 'include', 'exclude'
+        $logscope = get_config('logstore_socialflow', 'log_scope'); // Value all, include, exclude.
         if ($logscope === false) {
             $logscope = 'all';
         }
@@ -113,7 +136,7 @@ class store implements \tool_log\log\writer {
 
         $records = [];
         foreach ($events as $event) {
-            if ($logscope !== 'all' // first checking the fast option
+            if ($logscope !== 'all' // First checking the fast option.
                 && (($logscope === 'include' && !in_array($event['courseid'], $courseids))
                 || ($logscope === 'exclude' && in_array($event['courseid'], $courseids)))) {
                 continue;
@@ -121,26 +144,27 @@ class store implements \tool_log\log\writer {
             if (count($trackingroles) !== 0 || count($nottrackingroles) !== 0) {
                 $coursecontext = context_course::instance($event['courseid'], IGNORE_MISSING);
                 $trackevent = true;
-                if ($coursecontext) { // context might not be defined for global events like login, main page.
+                if ($coursecontext) { // Context might not be defined for global events like login, main page.
                     $userroles = get_user_roles($coursecontext, $event['userid']);
                     if (isguestuser()) {
-                        // we "fake" a guest role here as only the shortname matters (that way, we don't need another database request)
+                        // We "fake" a guest role here as only the shortname matters.
+                        // That way, we don't need another database request.
                         $guestrole = new \stdClass;
                         $guestrole->shortname = 'guest';
                         $userroles[] = $guestrole;
                     }
-                    if (count($trackingroles) !== 0) { // whitelist mode, respecting blacklist
+                    if (count($trackingroles) !== 0) { // Whitelist mode, respecting blacklist.
                         $trackevent = false;
                         foreach ($userroles as $role) {
-                            if (in_array($role->shortname, $nottrackingroles)) { // blacklisted
+                            if (in_array($role->shortname, $nottrackingroles)) { // Blacklisted.
                                 $trackevent = false;
                                 break;
                             }
-                            if (in_array($role->shortname, $trackingroles)) { // whitelisted
+                            if (in_array($role->shortname, $trackingroles)) { // Whitelisted.
                                 $trackevent = true;
                             }
                         }
-                    } else { // blacklist mode, no whitelist defined
+                    } else { // Blacklist mode, no whitelist defined.
                         foreach ($userroles as $role) {
                             if (in_array($role->shortname, $nottrackingroles)) {
                                 $trackevent = false;
@@ -149,7 +173,7 @@ class store implements \tool_log\log\writer {
                         }
                     }
                 } else if (count($trackingroles) !== 0) {
-                    // whitelist is active -> only track specific roles, therefore skip this one as no role is defined
+                    // Whitelist is active -> only track specific roles, therefore skip this one as no role is defined.
                     $trackevent = false;
                 }
                 if (!$trackevent) {
@@ -162,7 +186,7 @@ class store implements \tool_log\log\writer {
             if ($dbevent) {
                 $eventid = $dbevent->id;
             } else {
-               continue;
+                continue;
             }
             $record = new stdClass();
             $record->eventid = $eventid;
