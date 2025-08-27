@@ -34,7 +34,7 @@ $tasks = [
         'hour' => '1',
         'day' => '*',
         'dayofweek' => '*',
-        'month' => '*'
+        'month' => '*',
     ],
         [
         'classname' => '\logstore_socialflow\task\nbpa_task',
@@ -43,7 +43,7 @@ $tasks = [
         'hour' => '2',
         'day' => '*',
         'dayofweek' => '*',
-        'month' => '*'
+        'month' => '*',
     ],
     [
         'classname' => '\logstore_socialflow\task\hits_task',
@@ -52,6 +52,6 @@ $tasks = [
         'hour' => '3',
         'day' => '0',
         'dayofweek' => '*',
-        'month' => '*'
+        'month' => '*',
     ],
 ];
