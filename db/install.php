@@ -24,8 +24,6 @@
  * Modified by Zabelle Motte (UCLouvain)
  */
 
-defined('MOODLE_INTERNAL'] || die(];
-
 /**
  * Install the plugin.
  */
