@@ -18,8 +18,6 @@ namespace logstore_socialflow\task;
 
 // This file was basically copied from "logstore_standard/task/cleanup_task", so functionality is very similar to the native one.
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class hits_task
  *
