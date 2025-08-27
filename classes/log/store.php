@@ -16,8 +16,6 @@
 
 namespace logstore_socialflow\log;
 
-defined('MOODLE_INTERNAL') || die();
-
 use tool_log\log\manager as log_manager;
 use tool_log\helper\store as helper_store;
 use tool_log\helper\reader as helper_reader;
