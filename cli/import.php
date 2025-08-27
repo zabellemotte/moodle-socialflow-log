@@ -1,4 +1,33 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * CLI script to import data into the SocialFlow logstore.
+ *
+ * Usage:
+ *     $ php import.php
+ *
+ * @package     logstore_socialflow
+ * Fork of logstore_lanalytics
+ * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Modified by Zabelle Motte (UCLouvain)
+ */
+
+ defined('MOODLE_INTERNAL') || die();
 
 $offsetid = 0;
 $batch = 10000;
@@ -13,13 +42,13 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 require(dirname(__FILE__) . '/../../../../../../config.php');
 require_once($CFG->libdir.'/clilib.php');
 
-$usage = "Imports data from table `logstore_standard_log` into table `logstore_socialflow_log`.
+$usage = "Imports data from table 'logstore_standard_log' into table 'logstore_socialflow_log'.
 
 Options:
     -h --help               Print this help.
-    --clean                 Clean the `logstore_socialflow_log` table before running.
+    --clean                 Clean the 'logstore_socialflow_log' table before running.
                             Be aware, that this options deletes all data from the
-                            table `logstore_socialflow_log`. This option should only
+                            table 'logstore_socialflow_log'. This option should only
                             be used before activating the logstore in the settings.
     --startid=<value>       First ID to be imported, leave empty to import all events.
     --pastweeks=<value>     Instead of using startid you can use past-weeks to set how
@@ -42,7 +71,7 @@ list($options, $unrecognised) = cli_get_params([
     'batch' => 0,
     'limit' => 0,
 ], [
-    'h' => 'help'
+    'h' => 'help',
 ]);
 
 if ($options['help']) {
@@ -51,7 +80,7 @@ if ($options['help']) {
 }
 
 if ($options['startid']) {
-    $offsetid = (int) $options['startid'] - 1; // -1 as this is treated as offset
+    $offsetid = (int) $options['startid'] - 1; // Value -1 as this is treated as offset.
 }
 
 if ($options['batch']) {
@@ -78,40 +107,37 @@ if ($options['pastweeks']) {
     cli_writeln("  Found row ID: {$foundid}");
 }
 
+
+/**
+ * Truncate the log table.
+ *
+ * @return void
+ */
 function truncate_logs() {
     global $DB;
     $DB->execute("TRUNCATE {logstore_socialflow_log}");
 }
 
-// returns true if there is more data
+/**
+ * Check if new data exist in standard log table.
+ *
+ * @return bool
+ */
 function check_for_rows(int $offsetid) {
     global $DB;
     $row = $DB->get_records_sql("SELECT id FROM {logstore_standard_log} WHERE id > ? LIMIT 1", [$offsetid]);
     return count($row) !== 0;
 }
 
-/*function identify_events(int $offsetid, int $limitid) {
-    global $DB;
 
-    // query unknown event names
-    $sql = <<<SQL
-        SELECT DISTINCT l.eventname
-        FROM {logstore_standard_log} l
-        LEFT JOIN {logstore_socialflow_evts} e
-            ON e.eventname = l.eventname
-        WHERE l.id > ? AND l.id <= ?
-            AND e.id IS NULL
-SQL;
-    $rows = $DB->get_records_sql($sql, [$offsetid, $limitid]);
-    
-    if (count($rows) !== 0) { // insert event names into table
-        $eventid = $DB->insert_records('logstore_socialflow_evts', $rows);
-    }
-} */
-
+/**
+ * Copy data from standard log table to social flow log table
+ *
+ * @return void
+ */
 function copy_rows(int $offsetid, int $limitid) {
     global $DB;
-    
+
     $sql = <<<SQL
         INSERT INTO {logstore_socialflow_log}
             (eventid, courseid, contextid, userid, timecreated)
@@ -130,20 +156,25 @@ SQL;
     $rows = $DB->execute($sql, [$offsetid, $limitid]);
 }
 
+/**
+ * Check if new data exist in standard log table.
+ *
+ * @return int
+ */
 function log_rows() {
     global $DB;
     return $DB->count_records('logstore_socialflow_log');
 }
 
 $rowcount = log_rows();
-cli_writeln("Number of rows inside `logstore_socialflow_log` before import: {$rowcount}");
+cli_writeln("Number of rows inside 'logstore_socialflow_log' before import: {$rowcount}");
 
 if ($options['clean']) {
-    cli_writeln("  Truncating table `logstore_socialflow_log`.");
+    cli_writeln("  Truncating table 'logstore_socialflow_log'.");
     truncate_logs();
 
     $rowcount = log_rows();
-    cli_writeln("Number of rows inside `logstore_socialflow_log` after TRUNCATE: {$rowcount}");
+    cli_writeln("Number of rows inside 'logstore_socialflow_log' after TRUNCATE: {$rowcount}");
 }
 
 cli_writeln("Starting import.");
@@ -152,7 +183,6 @@ while (check_for_rows($offsetid) && ($limit === 0 || $offsetid < $limit)) {
     $limitid = $offsetid + $batch;
     cli_writeln("  Importing rows from > {$offsetid} to <= {$limitid}");
 
- //   identify_events($offsetid, $limitid);
     copy_rows($offsetid, $limitid);
 
     $offsetid = $limitid;
