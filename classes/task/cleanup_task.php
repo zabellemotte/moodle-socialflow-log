@@ -14,6 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace logstore_socialflow\task;
+
+// This file was basically copied from "logstore_standard/task/cleanup_task", so functionality is very similar to the native one.
+
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Scheduled cleanup task.
  *
@@ -22,13 +28,6 @@
  * @copyright   Lehr- und Forschungsgebiet Ingenieurhydrologie - RWTH Aachen University
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Modified by Zabelle Motte (UCLouvain) */
-
-namespace logstore_socialflow\task;
-
-// This file was basically copied from "logstore_standard/task/cleanup_task", so functionality is very similar to the native one
-
-defined('MOODLE_INTERNAL') || die();
-
 class cleanup_task extends \core\task\scheduled_task {
 
     /**
@@ -48,43 +47,41 @@ class cleanup_task extends \core\task\scheduled_task {
         global $DB;
         mtrace("Log cleanup begins ...");
         $loglifetime = (int) get_config('logstore_socialflow', 'loglifetime');
- 
 
         if (empty($loglifetime) || $loglifetime < 0) {
-            $loglifetime=14;
+            $loglifetime = 14;
         }
 
         $loglifetime = time() - ($loglifetime * 3600 * 24); // Value in days.
-    
+
         $start = time();
-        
+
         // Events are deleted when no event arised on the contextid during the longlifetime.
-        // As far as a there are events linked to a contextid during the loglifetime, data are preserved 
-        // to be able to indicate user if he had an action linked to this contextid 
-        // (even if this action is outside the loglifetime).
-        $old_data = $DB->get_records_sql(
-           "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime 
-            AND contextid NOT IN (SELECT DISTINCT contextid 
+        // As far as a there are events linked to a contextid during the loglifetime ...
+        // Data are preserved to be able to indicate user if he had an action linked to this contextid.
+        // Even if this action is outside the loglifetime.
+        $olddata = $DB->get_records_sql(
+           "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime
+            AND contextid NOT IN (SELECT DISTINCT contextid
                                 FROM {logstore_socialflow_log}
                                 WHERE timecreated > $loglifetime)"  );
-    if ($old_data) {
-        $ids = array();
-        foreach ($old_data as $row) {
-            $ids[] = $row->id; 
-        }
-        // data suppression is chunked in several delete actions of 500 records to avoid database trashing
-        while (count($ids)>0){
-            $lids=count($ids);
-            $cids=array_slice($ids, 0, 50);
-            $ids= array_slice($ids, 50, $lids - 50);
-            $clauseIN = implode(', ', $cids);
-            $select = "id IN ($clauseIN)";
-            $DB->delete_records_select("logstore_socialflow_log",$select);
-         }
-        mtrace("Old log records from socialflow log store deleted.");
-    }
-    else{
+        if ($olddata) {
+            $ids = [];
+            foreach ($olddata as $row) {
+                $ids[] = $row->id;
+            }
+            // Data suppression is chunked in several delete actions of 500 records to avoid database trashing.
+            while (count($ids) > 0) {
+                $lids = count($ids);
+                $cids = array_slice($ids, 0, 50);
+                $ids = array_slice($ids, 50, $lids - 50);
+                $clausein = implode(', ', $cids);
+                $select = "id IN ($clausein)";
+                $DB->delete_records_select("logstore_socialflow_log", $select);
+            }
+            mtrace("Old log records from socialflow log store deleted.");
+        } else {
             mtrace("No old data to delete in socialflow logs.");
-    }
+        }
     }
 }
