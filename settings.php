@@ -30,15 +30,15 @@ if ($hassiteconfig) {
         'logstore_socialflow/log_scope',
         get_string('setting_log_scope', 'logstore_socialflow'),
         get_string('setting_log_scope_descr', 'logstore_socialflow'),
-        'all', // default value
+        'all', // Default value.
         [
             'all' => get_string('setting_log_scope_all', 'logstore_socialflow'),
             'include' => get_string('setting_log_scope_include', 'logstore_socialflow'),
-            'exclude' => get_string('setting_log_scope_exclude', 'logstore_socialflow')
+            'exclude' => get_string('setting_log_scope_exclude', 'logstore_socialflow'),
         ]
     ));
 
-    // This is only a textarea to make it more comforable entering the values
+    // This is only a textarea to make it more comforable entering the values.
     $settings->add(new admin_setting_configtextarea(
         'logstore_socialflow/course_ids',
         get_string('setting_course_ids', 'logstore_socialflow'),
@@ -53,7 +53,7 @@ if ($hassiteconfig) {
         'logstore_socialflow/tracking_roles',
         get_string('setting_tracking_roles', 'logstore_socialflow'),
         get_string('setting_tracking_roles_descr', 'logstore_socialflow'),
-        'student', // default value
+        'student', // Default value.
         PARAM_RAW
     ));
 
@@ -61,14 +61,14 @@ if ($hassiteconfig) {
         'logstore_socialflow/nontracking_roles',
         get_string('setting_nontracking_roles', 'logstore_socialflow'),
         get_string('setting_nontracking_roles_descr', 'logstore_socialflow'),
-        'teacher,editingteacher,manager', // default value
+        '', // Default value.
         PARAM_RAW
     ));
 
-    $options = array(
+    $options = [
         14  => get_string('numweeks', '', 2 ),
-        7  => get_string('numweeks', '', 1 )
-    );
+        7  => get_string('numweeks', '', 1 ),
+    ];
     $settings->add(new admin_setting_configselect('logstore_socialflow/loglifetime',
         new lang_string('loglifetime', 'logstore_socialflow'),
         new lang_string('configloglifetime_descr', 'logstore_socialflow'), 0, $options));
