@@ -19,6 +19,7 @@ namespace logstore_socialflow\log;
 use tool_log\log\manager as log_manager;
 use tool_log\helper\store as helper_store;
 use tool_log\helper\reader as helper_reader;
+use tool_log\helper\buffered_writer as helper_writer; // We are overwriting write(), see below.
 use core\event\base as event_base;
 use stdClass;
 use context_course;
@@ -43,7 +44,8 @@ const MOODLE_API = 10100;
 class store implements \tool_log\log\writer {
     use helper_store;
     use helper_reader;
-    use tool_log\helper\buffered_writer; // We are overwriting write(), see below.
+    use helper_writer;
+
 
     /**
      * Creating the new log store
