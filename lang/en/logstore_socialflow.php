@@ -26,8 +26,10 @@
 
 $string['buffersize'] = 'buffersize';
 
+$string['configloglifetime_descr'] = 'This specifies the length of time you want to keep logs about course activity. Logs are suppressed once one action has no more hits during loglifetime.';
+
 $string['loglifetime'] = 'Keep logs for';
-$string['loglifetime_descr'] = 'This specifies the length of time you want to keep logs about course activity. Logs are suppressed once one action has no more hits during loglifetime.';
+
 
 
 
