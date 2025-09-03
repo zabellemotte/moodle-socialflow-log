@@ -1,12 +1,17 @@
 # General informations
 The Social Flow proposes a view on most frequent actions in courses to student and teachers on the Moodle dashboard.
 ![Dashboard integrating social flow block](img/SocialflowBlockV1Dashboard.png)
+
 It has been designed to stimulate student engagement while indicating the community main actions to help each student to set its own objectives.
 The Social Flow view may be customized by each student with several preferences
 - reference period : depending on its relation to deadlines, students may configure reference period to 1 day to 2 weeks;![Social flow block course selection](img/SocialflowBlockV1option1.png)
+
 - courses selection : student may decide the Social Flow to present actions occuring in a selection of its courses;![Social flow block reference period selection](img/SocialflowBlockV1option2.png)
+  
 - action type : enable the student to display 'consultation' actions (like playing a video), 'contribution' actions (like submitting a quiz attempt) or both; ![Social flow block course selection](img/SocialflowBlockV1option3.png)
+  
 - number of lines : defines the number of lines to display in the social flow view.![Social flow block number of libne selection](img/SocialflowBlockV1option4.png)
+
 Activities with closing date are associated to informations about the closing date.
 ![Social flow closing date informations](img/SocialflowV2.png)
 
