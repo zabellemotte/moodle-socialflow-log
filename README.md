@@ -3,11 +3,12 @@ The Social Flow proposes a view on most frequent actions in courses to student a
 ![Dashboard integrating social flow block](img/SocialflowBlockV1Dashboard.png)
 It has been designed to stimulate student engagement while indicating the community main actions to help each student to set its own objectives.
 The Social Flow view may be customized by each student with several preferences
-- courses selection : student may decide the Social Flow to present actions occuring in a selection of its courses; ![Social flow block course selection](img/SocialflowBlockV1option1.png)
-- reference period : depending on its relation to deadlines, students may configure reference period to 1 day to 2 weeks;
-- action type : enable the student to display 'consultation' actions (like playing a video), 'contribution' actions (like submitting a quiz attempt) or both
-- number of lines : defines the number of lines to display in the social flow view.
+- reference period : depending on its relation to deadlines, students may configure reference period to 1 day to 2 weeks;![Social flow block course selection](img/SocialflowBlockV1option1.png)
+- courses selection : student may decide the Social Flow to present actions occuring in a selection of its courses;![Social flow block course selection](img/SocialflowBlockV1option2.png)
+- action type : enable the student to display 'consultation' actions (like playing a video), 'contribution' actions (like submitting a quiz attempt) or both; ![Social flow block course selection](img/SocialflowBlockV1option3.png)
+- number of lines : defines the number of lines to display in the social flow view.![Social flow block course selection](img/SocialflowBlockV1option4.png)
 Activities with closing date are associated to informations about the closing date.
+![Social flow block course selection](img/SocialflowBlockV2.png)
 
 # One view based on two plugins
 The Social Flow view is based on two plugins:
@@ -94,6 +95,7 @@ In addition, there are helper tables, that do not store data-privacy related dat
 
 This plugin was developed with data privacy in mind.
 It proceeds a new data treatement that is clearly described in the help tab of the block plugin.
+![Social flow block course selection](img/SocialflowBlockV1help.png)
 This new treatement should be described in the data privacy statement.
 
 # Reference
