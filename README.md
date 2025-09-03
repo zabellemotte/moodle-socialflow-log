@@ -31,7 +31,7 @@ First, download and install this plugin (logstore_socialflow). Afterwards, insta
 
 ## Cutomize the logged events
 The social flow stores only a selection of events linked to student actions performed in the courses.
-The logged actions are stored in the logstore_socialflow_evts table, that you may augment with your additionnal plugins events.
+The logged actions are stored in the `logstore_socialflow_evts` table, that you may augment with your additionnal plugins events.
 Events may have 2 types : 
 - `consult` (like `\mod_assign\event\course_module_viewed`) for actions associates to a student resource or activity consultation,
 - `contrib` (like `\mod_assign\event\assessable_submitted`) for actions associated to a student activity contribution.
@@ -43,7 +43,7 @@ The social flow takes into account the activities closing date and late date and
 - `haslatedate` : takes value '0" if no late date may be associated to this module and takes value '1' the module supports late date
 - `closingdatefield` : label of the table field storing the late date (action may still be proceeded after this date, but are noted as late)
 
-## Activating the logstore
+## Activate the logstore
 After installation you need to enable the logstore plugin:
 - Go to Moodle Site administration page
 - In the Plugins tab, scroll down to Logging
