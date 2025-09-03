@@ -8,14 +8,14 @@ The Social Flow view may be customized by each student with several preferences
 - number of lines : defines the number of lines to display in the social flow view.
 Activities with closing date are associated to informations about the closing date.
 
-# 1 view based on 2 plugins
+# One view based on two plugins
 The Social Flow view is based on two plugins:
 - logstore_socialflow: Logs the events to the database and makes all data treatements with a performant approach; you need to install this dependency first
 - block_socialflow:  Block to display the Social Flow data on the dashboard.
 
-#Installation
+# Installation
 
-##Requirements:
+## Requirements:
 - Moodle: Version 4.4 or higher (currently testing with 4.4, 4.5 and 5.0)
 - Database: MySQL/MariaDB or Postgres (other database types are implemented but have not been tested)
 
@@ -35,7 +35,7 @@ The social flow takes into account the activities closing date and late date and
 - haslatedate : takes value '0" if no late date may be associated to this module and takes value '1' the module supports late date
 - closingdatefield : label of the table field storing the late date (action may still be proceeded after this date, but are noted as late)
 
-##Activating the logstore
+## Activating the logstore
 After installation you need to enable the logstore plugin:
 - Go to Moodle Site administration page
 - In the Plugins tab, scroll down to Logging
@@ -49,7 +49,7 @@ After installation and activation of the logstore, you have to make some actions
 - then run the \logstore_socialflow\task\hits_task task (computes the number of hits for each action in the logstore_socialflow_log table and stores this in the logstore_socialflow_hits table; then get informations about the closing dates of logged activities and stores it in the closing table)
 Note that \logstore_socialflow\task\cleanup_task performs data cleanup in the log table.
 
-##Import data from logstore_standard
+## Import data from logstore_standard
 
 After installation, all data are empty as no data has been logged so far. But your Moodle site might log data through Moodle's own logging system, the logstore_standard_log. The logstore plugin offers a simple way to import that data by using the import.php script. It can be called from the shell like this:
 
@@ -58,7 +58,7 @@ $ php cli/import.php
 
 This will immediately start the import process. Instead you can also call php cli/import.php --help to see a list of possible options. You can for example only import the last X weeks or import only events starting from a specific ID to limit the amount of data you import.
 
-#Configuration
+# Configuration
 
 You should configure both plugins. The logstore plugin has options related to logging data and writing data to the database. The block plugin has no option but need to be added on the Default Dashboard via menu
 Administration > Site administration > Appearance > Default Dashboard page
