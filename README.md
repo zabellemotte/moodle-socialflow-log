@@ -1,4 +1,4 @@
-#General informations
+# General informations
 The Social Flow proposes a view on most frequent actions in courses to student and teachers on the Moodle dashboard.
 It has been designed to stimulate student engagement while indicating the community main actions to help each student to set its own objectives.
 The Social Flow view may be customized by each student with several preferences
