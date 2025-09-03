@@ -79,16 +79,15 @@ The logstore has the following options:
 
 # Data privacy
 
-Our plugin logs no personal data. 
+Social Flow plugins log no personal data. 
 
 When an event is triggered inside of Moodle, the following data is logged by the logstore plugin:
 Table: logstore_socialflow_log
- Field name 	Type 	Explanation
-id 	BIGINT 	 
-eventid 	INT 	Type of action, e.g. "Resource viewed"
-courseid 	BIGINT 	Corresponding course
-contextid 	BIGINT 	Corresponding context, e.g. ID of the resource that was viewed
-timecreated 	BIGINT 	Date and time, exact to the second
+- id : BIGINT 	 
+- eventid : INT (Type of action, e.g. "Resource viewed")
+- courseid :	BIGINT (Corresponding course)
+- contextid : BIGINT (Corresponding context, e.g. ID of the resource that was viewed)
+- timecreated : BIGINT (Date and time, exact to the second)
 
 In addition, there are helper tables, that do not store data-privacy related data and only exist to speed up queries or to minimize storage requirements.
 
