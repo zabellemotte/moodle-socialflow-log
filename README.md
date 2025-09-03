@@ -28,6 +28,7 @@ The logged actions are stored in the logstore_socialflow_evts table, that you ma
 Events may have 2 types : 
 - 'consult' (like \mod_assign\event\course_module_viewed) for actions associates to a student resource or activity consultation,
 - 'contrib' (like \mod_assign\event\assessable_submitted) for actions associated to a student activity contribution.
+  
 The social flow takes into account the activities closing date and late date and information about table and field where closing date and late date are stored are therefore necessary to define a new event:
 - moduletable stores the name of the table where the closing or late date field are stored (often the plugin name but not always)
 - hasclosingdate : takes value '0" if no closing date may be associated to this module and takes value '1' the module supports closing date
