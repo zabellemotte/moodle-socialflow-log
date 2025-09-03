@@ -61,8 +61,8 @@ Note that `\logstore_socialflow\task\cleanup_task` performs data cleanup in the 
 
 After installation, all data are empty as no data has been logged so far. But your Moodle site might log data through Moodle's own logging system, the `logstore_standard_log`. The logstore plugin offers a simple way to import that data by using the import.php script. It can be called from the shell like this:
 
-$ cd MOODLE_PATH/admin/tool/log/store/socialflow
-$ php cli/import.php
+```$ cd MOODLE_PATH/admin/tool/log/store/socialflow```
+```$ php cli/import.php```
 
 This will immediately start the import process. 
 
