@@ -107,7 +107,7 @@ This new treatement should be described in the data privacy statement.
 
 # Reference
 
-The Social Flow plugins were developed by [Isabelle Motte](https://www.uclouvain.be/fr/people/isabelle.motte) from [Universtité catholique de Louvain](https://www.uclouvain.be) in the context of a technical development for a career evolution. This development is presented in detail in the associated report :
+The Social Flow plugins were developed by [Isabelle Motte](https://www.uclouvain.be/fr/people/isabelle.motte) from [Université catholique de Louvain](https://www.uclouvain.be) in the context of a technical development for a career evolution. This development is presented in detail in the associated report :
 
 [Moodle Learning Analytics: how to extract log data efficiently ? Feedback on the development of social flow plugins](LINK)
 
