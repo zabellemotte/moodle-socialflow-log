@@ -57,7 +57,7 @@ After installation, all data are empty as no data has been logged so far. But yo
 $ cd MOODLE_PATH/admin/tool/log/store/socialflow
 $ php cli/import.php
 
-This will immediately start the import process. Instead you can also call php cli/import.php --help to see a list of possible options. You can for example only import the last X weeks or import only events starting from a specific ID to limit the amount of data you import.
+This will immediately start the import process. 
 
 # Configuration
 
