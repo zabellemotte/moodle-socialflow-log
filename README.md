@@ -61,10 +61,10 @@ This will immediately start the import process. Instead you can also call php cl
 
 # Configuration
 
-You should configure both plugins. The logstore plugin has options related to logging data and writing data to the database. The block plugin has no option but need to be added on the Default Dashboard via menu
+You only have to configure the log plugin. The logstore plugin has options related to logging data and writing data to the database. The block plugin has no option but need to be added on the Default Dashboard via menu
 Administration > Site administration > Appearance > Default Dashboard page
 
-The settings page can be found in:
+The log plugin settings page can be found in:
 Administration > Site Administration > Plugins > Log plugins > Socialflow
 
 The logstore has the following options:
