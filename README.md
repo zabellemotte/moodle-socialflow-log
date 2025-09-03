@@ -30,7 +30,7 @@ Events may have 2 types :
 - 'contrib' (like \mod_assign\event\assessable_submitted) for actions associated to a student activity contribution.
   
 The social flow takes into account the activities closing date and late date and information about table and field where closing date and late date are stored are therefore necessary to define a new event:
-- moduletable stores the name of the table where the closing or late date field are stored (often the plugin name but not always)
+- moduletable: stores the name of the table where the closing or late date field are stored (often the plugin name but not always)
 - hasclosingdate : takes value '0" if no closing date may be associated to this module and takes value '1' the module supports closing date
 - closingdatefield : label of the table field storing the closing date (action may no more be proceeded after this date)
 - haslatedate : takes value '0" if no late date may be associated to this module and takes value '1' the module supports late date
