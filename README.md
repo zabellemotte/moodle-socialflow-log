@@ -38,9 +38,9 @@ Events may have 2 types :
   
 The social flow takes into account the activities closing date and late date and information.  Closing date and late date fields names are therefore necessary to define a new event:
 - `moduletable`: stores the name of the table where the closing or late date field are stored (often the plugin name but not always)
-- `hasclosingdate` : takes value '0' if no closing date may be associated to this module and takes value '1' the module supports closing date
+- `hasclosingdate` : takes value '0' if no closing date may be associated to this module and takes value '1' if the module supports closing date
 - `closingdatefield` : label of the table field storing the closing date (action may no more be proceeded after this date)
-- `haslatedate` : takes value '0' if no late date may be associated to this module and takes value '1' the module supports late date
+- `haslatedate` : takes value '0' if no late date may be associated to this module and takes value '1' if the module supports late date
 - `closingdatefield` : label of the table field storing the late date (action may still be proceeded after this date, but are noted as late)
 
 ## Activate the logstore
