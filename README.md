@@ -97,7 +97,7 @@ This new treatement should be described in the data privacy statement.
 
 # Reference
 
-The Socialflow plugins were developed by [Isabelle Motte](https://www.uclouvain.be/fr/people/isabelle.motte) from [Univestité catholique de Louvain](https://www.uclouvain.be) in the context of a technical development for a career evolution:
+The Socialflow plugins were developed by [Isabelle Motte](https://www.uclouvain.be/fr/people/isabelle.motte) from [Univestité catholique de Louvain](https://www.uclouvain.be) in the context of a technical development for a career evolution. This development is presented in detail in the associated report :
 Moodle Learning Analytics: how to extract log data efficiently ? Feedback on the development of social flow plugins LINK
 
 This work is based on the [Learning Analytics Plugins](https://moodle.org/plugins/local_learning_analytics) developed by Thomas Dondorf at RWTH Aachen University in the context of his PhD dissertation.
