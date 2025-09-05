@@ -3,6 +3,7 @@
 The Social Flow proposes a view on most frequent actions in courses to student and teachers on the Moodle dashboard.
 ![Dashboard integrating social flow block](img/SocialflowBlockV1Dashboard.png)
 
+## Student preferences
 The Social Flow view may be customized by each student with several preferences:
 - reference period : depending on its relationship to deadlines, student may configure reference period to 1 day to 2 weeks;
 ![Social flow block course selection](img/SocialflowBlockV1option1.png)
@@ -16,7 +17,8 @@ The Social Flow view may be customized by each student with several preferences:
 - number of lines : defines the number of lines to display in the social flow view.
 ![Social flow block number of libne selection](img/SocialflowBlockV1option4.png)
 
-Activities with closing date are associated to informations about the closing date.
+## Informations about closing dates 
+Activities with closing date are associated to contextual informations about the closing date.
 ![Social flow closing date informations](img/SocialflowV2.png)
 
 # One view based on two plugins
