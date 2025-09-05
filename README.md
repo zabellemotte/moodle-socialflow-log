@@ -67,6 +67,8 @@ On a test platform, you have to make some actions in courses as a student and th
 - then run the `\logstore_socialflow\task\hits_task` task (computes the number of hits for each action in the `logstore_socialflow_log` table and stores this in the `logstore_socialflow_hits` table; then get informations about the closing dates of logged activities and stores it in the `logstore_socialflow_closing` table)
 Note that `\logstore_socialflow\task\cleanup_task` performs data cleanup in the log table.
 
+If needed, the scheduled tasks may be runned manually while following the [Official documentation on scheduled tasks](https://docs.moodle.org/500/en/Scheduled_tasks).
+
 ## Import data from logstore_standard
 
 After installation, all data are empty as no data has been logged so far. But your Moodle site might log data through Moodle's own logging system, the `logstore_standard_log`. The logstore plugin offers a simple way to import that data by using the import.php script. It can be called from the shell like this:
