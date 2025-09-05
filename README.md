@@ -61,6 +61,7 @@ The log store is now activated and will log events.
 
 ## Run scheduled tasks
 The plugin is configure to run 3 cron tasks during the night to refresh the social flow block informations. These tasks are configured to be runned during the night and no data are presented in the social flow block as far has these tasks have not been triggered.
+
 On a test platform, you have to make some actions in courses as a student and then run the 2 cron task associated to social flow so that social flow tables are filled: 
 - first run `\logstore_socialflow\task\nbpa_task` task (computes the number of students in each `logstore_socialflow_log` table logged course and stores this informations in the `logstore_socialflow_nbpa` table )
 - then run the `\logstore_socialflow\task\hits_task` task (computes the number of hits for each action in the `logstore_socialflow_log` table and stores this in the `logstore_socialflow_hits` table; then get informations about the closing dates of logged activities and stores it in the `logstore_socialflow_closing` table)
