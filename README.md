@@ -57,7 +57,7 @@ After installation you need to enable the logstore plugin via this menu :
 
 There should be a row for the installed logstore plugin with the name Socialflow Log and you have to click lick on the eye icon (👁) to enable the log store.
 The log store is now activated and will log events.
-![Social flow closing date informations](img/InstallSFLog1.png)
+![Social flow closing date informations](img/InstallSFLog1.jpg)
 
 ## Run scheduled tasks
 The plugin is configure to run 3 cron tasks during the night to refresh the social flow block informations. These tasks are configured to be runned during the night and no data are presented in the social flow block as far has these tasks have not been triggered.
