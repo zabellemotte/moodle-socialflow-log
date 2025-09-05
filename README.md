@@ -20,6 +20,7 @@ The Social Flow view may be customized by each student with several preferences:
 ## Informations about closing dates 
 Activities with closing date are associated to contextual informations about the closing date.
 ![Social flow closing date informations](img/SocialflowV2.png)
+It has not been possible to exclude modules with access restrictions from social flow, but they are presented as inactive in the social flow table. 
 
 # One view based on two plugins
 The Social Flow view is based on two plugins:
