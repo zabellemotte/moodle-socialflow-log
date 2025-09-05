@@ -56,7 +56,6 @@ After installation you need to enable the logstore plugin via this menu :
 > Administration > Site administration > Plugins > Manage log stores
 
 There should be a row for the installed logstore plugin with the name Socialflow Log and you have to click lick on the eye icon (👁) to enable the log store.
-The log store is now activated and will log events.
 ![Social flow closing date informations](img/InstallSFLog1.jpg)
 
 ## Run scheduled tasks
