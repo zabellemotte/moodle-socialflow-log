@@ -52,15 +52,15 @@ The social flow takes into account the activities closing date and late date and
 - `closingdatefield` : label of the table field storing the late date (action may still be proceeded after this date, but are noted as late)
 
 ## Activate the logstore
-After installation you need to enable the logstore plugin:
-- Go to Moodle Site administration page
-- In the Plugins tab, scroll down to Logging
-- Click on Manage log stores
-- There should be a row for the installed logstore plugin with the name Socialflow Log
-- Click on the eye icon (👁) to enable the log store.
+After installation you need to enable the logstore plugin via this menu :
+> Administration > Site administration > Plugins > Manage log stores
+There should be a row for the installed logstore plugin with the name Socialflow Log and you have to click lick on the eye icon (👁) to enable the log store.
 The log store is now activated and will log events.
+![Social flow closing date informations](img/InstallSFLog1.png)
 
-After installation and activation of the logstore, you have to make some actions in courses as a student and then run the 2 cron task associated to social flow so that social flow tables are filled : 
+## Run scheduled tasks
+The plugin is configure to run 3 cron tasks during the night to refresh the social flow block informations. These tasks are configured to be runned during the night and no data are presented in the social flow block as far has these tasks have not been triggered.
+On a test platform, you have to make some actions in courses as a student and then run the 2 cron task associated to social flow so that social flow tables are filled: 
 - first run `\logstore_socialflow\task\nbpa_task` task (computes the number of students in each `logstore_socialflow_log` table logged course and stores this informations in the `logstore_socialflow_nbpa` table )
 - then run the `\logstore_socialflow\task\hits_task` task (computes the number of hits for each action in the `logstore_socialflow_log` table and stores this in the `logstore_socialflow_hits` table; then get informations about the closing dates of logged activities and stores it in the `logstore_socialflow_closing` table)
 Note that `\logstore_socialflow\task\cleanup_task` performs data cleanup in the log table.
@@ -109,7 +109,7 @@ Table: `logstore_socialflow_log`
 In addition, there are helper tables, that do not store data-privacy related data and only exist to speed up queries or to minimize storage requirements.
 
 This plugin was developed with data privacy in mind.
-It proceeds a new data treatement that is clearly described in the help tab of the block plugin.
+It proceeds a new data treatement that is clearly described in the help tab of the block plugin to ensure efficient user information.
 ![Social flow help](img/SocialflowBlockV1help.png)
 This new treatement should be described in the data privacy statement.
 
