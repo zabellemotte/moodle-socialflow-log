@@ -165,10 +165,19 @@ class hits_task extends \core\task\scheduled_task {
                  throw new moodle_exception('unsupporteddbtype', 'error', '', $dbtype);
         }
         $result1 = $DB->execute($sql1);
-        if (!$result1) {
-            die("no data to treat");
-        }
+        
+        // Hits table replacement and temporary table dropping.
+        // No generic truncate function in moodle data api.
+        // So it is faster to drop table and recreate it, rather than deleteing all records.
+        $socihits = new \xmldb_table('logstore_socialflow_hits');
+        $dbman->rename_table($socihits, 'logstore_socialflow_hits_old');
+        $dbman->rename_table($tempsocihits, 'logstore_socialflow_hits');
+        $socihitsold = new \xmldb_table('logstore_socialflow_hits_old');
+        $dbman->drop_table($socihitsold);
+        mtrace("Hits informations updated");
+ 
 
+        mtrace("Closing table update begins ...");
         // Closing days computations are stored in an dedicated table because closing date field depends on the module.
         // For each event with closing date, the appropriate query is build and closing dates are stored in the table.
         $sql3 = "SELECT id, moduletable, closingdatefield FROM {logstore_socialflow_evts} WHERE hasclosingdate>0";
@@ -216,8 +225,7 @@ class hits_task extends \core\task\scheduled_task {
         if (!$result6) {
             die("error on temp closing table insert");
         }
-
-        mtrace("Informations stored in temporary tables, data replacement begins ...");
+        
         // Closing table replacement and temporary tables dropping.
         // No generic truncate function in moodle data api?
         // So it is faster to drop table and recreate it, rather than deleteing all records.
@@ -228,15 +236,7 @@ class hits_task extends \core\task\scheduled_task {
         $dbman->drop_table($sociclosingold);
         $sociclosingtemp2 = new \xmldb_table('logstore_socialflow_closing_temp2');
         $dbman->drop_table($sociclosingtemp2);
-
-        // Hits table replacement and temporary table dropping.
-        // No generic truncate function in moodle data api.
-        // So it is faster to drop table and recreate it, rather than deleteing all records.
-        $socihits = new \xmldb_table('logstore_socialflow_hits');
-        $dbman->rename_table($socihits, 'logstore_socialflow_hits_old');
-        $dbman->rename_table($tempsocihits, 'logstore_socialflow_hits');
-        $socihitsold = new \xmldb_table('logstore_socialflow_hits_old');
-        $dbman->drop_table($socihitsold);
-        mtrace("Hits and closing dates informations updated");
+        mtrace("Closing dates informations updated");
+       
     }
 }
