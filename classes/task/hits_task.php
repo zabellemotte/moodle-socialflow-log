@@ -87,7 +87,7 @@ class hits_task extends \core\task\scheduled_task {
         }
 
         // Create second temporay table to store closing date informations.
-        // This is necessary because it is impossible to exectute an imbricated request with SELECT and INSERT on the same table.
+        // This is necessary because it is impossible to exectute an imbricated query with SELECT and INSERT on the same table.
         $tempsociclosing2 = new \xmldb_table('logstore_socialflow_closing_temp2');
         if ($dbman->table_exists($tempsociclosing2)) {
             $dbman->drop_table($tempsociclosing2);
@@ -109,7 +109,7 @@ class hits_task extends \core\task\scheduled_task {
 
         $loglifetime = time() - ($loglifetime * 3600 * 24); // Value in days.
 
-        // Hit request depend on the SGBD, thanks to Chatgpt for conversion !
+        // Hit query depend on the SGBD, thanks to Chatgpt for the conversion !
         // Storing userids in one table field is the fastest way to store and access this information.
         // As far as no select action is made on this field this does not raise performance problem.
         $dbtype = $CFG->dbtype;
@@ -170,7 +170,7 @@ class hits_task extends \core\task\scheduled_task {
         }
 
         // Closing days computations are stored in an dedicated table because closing date field depends on the module.
-        // For each event with closing date, the appropriate request is build and closing dates are stored in the table.
+        // For each event with closing date, the appropriate query is build and closing dates are stored in the table.
         $sql3 = "SELECT id, moduletable, closingdatefield FROM {logstore_socialflow_evts} WHERE hasclosingdate>0";
         $result3 = $DB->get_records_sql($sql3);
         if ($result3) {
@@ -201,7 +201,7 @@ class hits_task extends \core\task\scheduled_task {
         // The requests below complete the closing table ...
         // So that all hits without closing date has an infinite value for closing date so 9999999999.
         // This operations requires 2 temporary tables ...
-        // Because it is impossible to play an imbricated request with SELECT and INSERT on the same table.
+        // Because it is impossible to play an imbricated query with SELECT and INSERT on the same table.
         $sql5 = "INSERT INTO {logstore_socialflow_closing_temp2} (hitid, closingdate)
                              SELECT h.id AS hitid, 9999999999 AS closingdate
                              FROM {logstore_socialflow_hits} h
