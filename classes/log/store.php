@@ -148,7 +148,7 @@ class store implements \tool_log\log\writer {
                     $userroles = get_user_roles($coursecontext, $event['userid']);
                     if (isguestuser()) {
                         // We "fake" a guest role here as only the shortname matters.
-                        // That way, we don't need another database request.
+                        // That way, we don't need another database query.
                         $guestrole = new \stdClass;
                         $guestrole->shortname = 'guest';
                         $userroles[] = $guestrole;
