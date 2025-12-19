@@ -27,7 +27,6 @@ namespace logstore_socialflow\task;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Modified by Zabelle Motte (UCLouvain) */
 class nbpa_task extends \core\task\scheduled_task {
-
     /**
      * Get a descriptive name for this task (shown to admins).
      *
