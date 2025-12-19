@@ -27,7 +27,6 @@ namespace logstore_socialflow\task;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Modified by Zabelle Motte (UCLouvain) */
 class cleanup_task extends \core\task\scheduled_task {
-
     /**
      * Get a descriptive name for this task (shown to admins).
      *
@@ -59,10 +58,11 @@ class cleanup_task extends \core\task\scheduled_task {
         // Data is preserved to be able to indicate user if he had an action linked to this contextid.
         // Even if this action is outside the loglifetime.
         $olddata = $DB->get_records_sql(
-           "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime
-            AND contextid NOT IN (SELECT DISTINCT contextid
+            "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime
+             AND contextid NOT IN (SELECT DISTINCT contextid
                                 FROM {logstore_socialflow_log}
-                                WHERE timecreated > $loglifetime)"  );
+                                WHERE timecreated > $loglifetime)"  
+        );
         if ($olddata) {
             $ids = [];
             foreach ($olddata as $row) {
