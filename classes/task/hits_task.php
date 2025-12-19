@@ -162,10 +162,10 @@ class hits_task extends \core\task\scheduled_task {
                                GROUP BY log.contextid, log.eventid, log.courseid";
                 break;
             default:
-                 throw new moodle_exception('unsupporteddbtype', 'error', '', $dbtype);
+            throw new moodle_exception('unsupporteddbtype', 'error', '', $dbtype);
         }
         $result1 = $DB->execute($sql1);
-        
+ 
         // Hits table replacement and temporary table dropping.
         // No generic truncate function in moodle data api.
         // So it is faster to drop table and recreate it, rather than deleteing all records.
@@ -175,8 +175,6 @@ class hits_task extends \core\task\scheduled_task {
         $socihitsold = new \xmldb_table('logstore_socialflow_hits_old');
         $dbman->drop_table($socihitsold);
         mtrace("Hits informations updated");
- 
-
         mtrace("Closing table update begins ...");
         // Closing days computations are stored in an dedicated table because closing date field depends on the module.
         // For each event with closing date, the appropriate query is build and closing dates are stored in the table.
@@ -191,13 +189,13 @@ class hits_task extends \core\task\scheduled_task {
                     // In core plugins, the default value for closing date field is zero.
                     // But in additionnal plugins, default value is sometimes null.
                     $sql4 = "INSERT INTO {logstore_socialflow_closing_temp} (hitid,closingdate)
-                                 SELECT DISTINCT h.id AS hitid,mt.".$closingdatefield."
+                                 SELECT DISTINCT h.id AS hitid,mt." . $closingdatefield."
                                  AS closingdate FROM {logstore_socialflow_hits} h
-                                 INNER JOIN {logstore_socialflow_evts} evts ON h.eventid =".$eventid.
+                                 INNER JOIN {logstore_socialflow_evts} evts ON h.eventid =" . $eventid.
                                  " INNER JOIN {context} c ON h.contextid = c.id
                                     INNER JOIN {course_modules} cm ON c.instanceid = cm.id
-                                    INNER JOIN {".$moduletable."} mt ON cm.instance=mt.id
-                                    WHERE (mt.".$closingdatefield." IS NOT NULL) AND (mt.".$closingdatefield." > 0)";
+                                    INNER JOIN {" . $moduletable . "} mt ON cm.instance=mt.id
+                                    WHERE (mt." . $closingdatefield ." IS NOT NULL) AND (mt." . $closingdatefield . " > 0)";
                     $result4 = $DB->execute($sql4);
                     if (!$result4) {
                         die("error on temp closing table insert");
@@ -225,7 +223,6 @@ class hits_task extends \core\task\scheduled_task {
         if (!$result6) {
             die("error on temp closing table insert");
         }
-        
         // Closing table replacement and temporary tables dropping.
         // No generic truncate function in moodle data api?
         // So it is faster to drop table and recreate it, rather than deleteing all records.
@@ -237,6 +234,5 @@ class hits_task extends \core\task\scheduled_task {
         $sociclosingtemp2 = new \xmldb_table('logstore_socialflow_closing_temp2');
         $dbman->drop_table($sociclosingtemp2);
         mtrace("Closing dates informations updated");
-       
     }
 }
