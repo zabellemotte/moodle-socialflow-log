@@ -50,7 +50,7 @@ class store implements \tool_log\log\writer {
     /**
      * Creating the new log store
      *
-     * @return string
+     * @param log_manager $manager The log manager instance.
      */
     public function __construct(log_manager $manager) {
         $this->helper_setup($manager);
@@ -59,7 +59,8 @@ class store implements \tool_log\log\writer {
     /**
      * Function to exclude anonymous and guest actions form log table
      *
-     * @return string
+     * @param event_base $event The event to check.
+     * @return bool True if the event should be ignored, false otherwise.
      */
     protected function is_event_ignored(event_base $event) {
         if ((!CLI_SCRIPT || PHPUNIT_TEST)) {
@@ -74,7 +75,8 @@ class store implements \tool_log\log\writer {
     /**
      * Function adapted form buffer_writer
      *
-     * @return string
+    * @param \core\event\base $event The event to write to the buffer.
+     * @return void
      */
     public function write(\core\event\base $event) {
         // Copied mostly from "tool_log\helper\buffered_writer" with some modifications.
@@ -102,7 +104,9 @@ class store implements \tool_log\log\writer {
     /**
      * Function storing events that are predefined in evts table
      *
-     * @return string
+     * @param array $events An array of events to insert. Each event should contain keys
+     *                      'eventname', 'timecreated', 'courseid', 'contextid', and 'userid'.
+     * @return void
      */
     protected function insert_event_entries($events) {
         global $DB, $CFG;
