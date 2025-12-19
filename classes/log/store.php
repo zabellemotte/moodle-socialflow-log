@@ -136,9 +136,11 @@ class store implements \tool_log\log\writer {
 
         $records = [];
         foreach ($events as $event) {
-            if (($logscope !== 'all') // First checking the fast option.
+            if (
+                ($logscope !== 'all') // First checking the fast option.
                 && (($logscope === 'include' && !in_array($event['courseid'], $courseids))
-                || ($logscope === 'exclude' && in_array($event['courseid'], $courseids)))) {
+                || ($logscope === 'exclude' && in_array($event['courseid'], $courseids)))
+            ) {
                 continue;
             }
             if (count($trackingroles) !== 0 || count($nottrackingroles) !== 0) {
