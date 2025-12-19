@@ -63,7 +63,7 @@ Example:
 php cli/import.php
 ";
 
-list($options, $unrecognised) = cli_get_params([
+[$options, $unrecognised] = cli_get_params([
     'help' => false,
     'clean' => false,
     'startid' => 0,
