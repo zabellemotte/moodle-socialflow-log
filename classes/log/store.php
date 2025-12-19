@@ -75,7 +75,7 @@ class store implements \tool_log\log\writer {
     /**
      * Function adapted form buffer_writer
      *
-    * @param \core\event\base $event The event to write to the buffer.
+     * @param \core\event\base $event The event to write to the buffer.
      * @return void
      */
     public function write(\core\event\base $event) {
