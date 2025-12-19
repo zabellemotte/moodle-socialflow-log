@@ -40,7 +40,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 }
 
 require(dirname(__FILE__) . '/../../../../../../config.php');
-require_once($CFG->libdir.'/clilib.php');
+require_once($CFG->libdir . '/clilib.php');
 
 $usage = "Imports data from table 'logstore_standard_log' into table 'logstore_socialflow_log'.
 
@@ -192,4 +192,3 @@ cli_writeln("Import finished.");
 
 $rowcount = log_rows();
 cli_writeln("Number of rows inside `logstore_socialflow_log` after import:  {$rowcount}");
-
