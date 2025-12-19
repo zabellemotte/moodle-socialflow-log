@@ -69,9 +69,14 @@ if ($hassiteconfig) {
         14  => get_string('numweeks', '', 2),
         7  => get_string('numweeks', '', 1),
     ];
-    $settings->add(new admin_setting_configselect('logstore_socialflow/loglifetime',
-    new lang_string('loglifetime', 'logstore_socialflow'),
-    new lang_string('configloglifetime_descr', 'logstore_socialflow'), 0, $options));
+    $settings->add(
+        new admin_setting_configselect('logstore_socialflow/loglifetime',
+            new lang_string('loglifetime', 'logstore_socialflow'),
+            new lang_string('configloglifetime_descr', 'logstore_socialflow'),
+            0,
+            $options
+        )
+    );
 
     $settings->add(new admin_setting_configtext(
         'logstore_socialflow/buffersize',
