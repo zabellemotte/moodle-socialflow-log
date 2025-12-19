@@ -121,7 +121,8 @@ function truncate_logs() {
 /**
  * Check if new data exist in standard log table.
  *
- * @return bool
+ * @param int $offsetid The last processed log id; the method checks for rows with higher IDs.
+ * @return bool True if there are new rows, false otherwise.
  */
 function check_for_rows(int $offsetid) {
     global $DB;
@@ -133,6 +134,8 @@ function check_for_rows(int $offsetid) {
 /**
  * Copy data from standard log table to social flow log table
  *
+ * @param int $offsetid The starting ID (exclusive) in the standard log table.
+ * @param int $limitid  The ending ID (inclusive) in the standard log table.
  * @return void
  */
 function copy_rows(int $offsetid, int $limitid) {
@@ -159,7 +162,7 @@ SQL;
 /**
  * Check if new data exist in standard log table.
  *
- * @return int
+ * @return int The total number of log entries.
  */
 function log_rows() {
     global $DB;
