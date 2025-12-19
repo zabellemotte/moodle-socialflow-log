@@ -136,7 +136,7 @@ class store implements \tool_log\log\writer {
 
         $records = [];
         foreach ($events as $event) {
-            if ($logscope !== 'all' // First checking the fast option.
+            if (($logscope !== 'all') // First checking the fast option.
                 && (($logscope === 'include' && !in_array($event['courseid'], $courseids))
                 || ($logscope === 'exclude' && in_array($event['courseid'], $courseids)))) {
                 continue;
@@ -149,7 +149,7 @@ class store implements \tool_log\log\writer {
                     if (isguestuser()) {
                         // We "fake" a guest role here as only the shortname matters.
                         // That way, we don't need another database query.
-                        $guestrole = new \stdClass;
+                        $guestrole = new \stdClass();
                         $guestrole->shortname = 'guest';
                         $userroles[] = $guestrole;
                     }
