@@ -61,7 +61,7 @@ class cleanup_task extends \core\task\scheduled_task {
             "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime
              AND contextid NOT IN (SELECT DISTINCT contextid
                                 FROM {logstore_socialflow_log}
-                                WHERE timecreated > $loglifetime)"  
+                                WHERE timecreated > $loglifetime)"
         );
         if ($olddata) {
             $ids = [];
