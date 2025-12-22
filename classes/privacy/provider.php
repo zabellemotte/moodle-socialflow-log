@@ -26,8 +26,6 @@
 
 namespace logstore_socialflow\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 use context;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_contextlist;
@@ -36,10 +34,17 @@ use core_privacy\local\request\plugin\provider as plugin_provider;
 use core_privacy\local\request\writer;
 use core_privacy\local\request\transform;
 
+/**
+ * Privacy provider for the logstore_socialflow plugin.
+ *
+ * @package    logstore_socialflow
+ * @copyright  Zabelle Motte 2025
+ * @author     Zabelle Motte (isabelle.motte@uclouvain.be)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class provider implements
     \core_privacy\local\metadata\provider,
     plugin_provider {
-
     /**
      * Returns metadata about this plugin's stored personal data.
      *
@@ -99,7 +104,6 @@ class provider implements
 
         list($insql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
         $params['userid'] = $userid;
-
         $sql = "
             SELECT l.contextid,
                    l.courseid,
@@ -112,20 +116,15 @@ class provider implements
                AND l.contextid $insql
              ORDER BY l.timecreated
         ";
-
         $records = $DB->get_records_sql($sql, $params);
-
         foreach ($records as $record) {
             $context = context::instance_by_id($record->contextid);
-
-            writer::with_context($context)->export_data(
-                [],
-                (object)[
-                    'event'       => $record->eventname,
-                    'courseid'    => $record->courseid,
-                    'timecreated' => transform::datetime($record->timecreated),
-                ]
-            );
+            $data = [
+               'event'       => $record->eventname,
+               'courseid'    => $record->courseid,
+               'timecreated' => transform::datetime($record->timecreated),
+            ];
+            writer::with_context($context)->export_data([], (object)$data);
         }
     }
 
