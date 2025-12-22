@@ -184,24 +184,6 @@ class hits_task extends \core\task\scheduled_task {
                 $eventid = $row->id;
                 $moduletable = $row->moduletable;
                 if ($dbman->table_exists($moduletable)) {
-                    $closingdatefield = $row->closingdatefield;
-                    // In core plugins, the default value for closing date field is zero.
-                    // But in additionnal plugins, default value is sometimes null.
-                    $allowedtables = [
-                        'assign' => 'assign',
-                        'quiz'   => 'quiz',
-                    ];
-                    $allowedfields = [
-                        'duedate',
-                        'timeclose',
-                    ];
-                    if (!array_key_exists($moduletable, $allowedtables)) {
-                        throw new coding_exception('Invalid module table');
-                    }
-                    if (!in_array($closingdatefield, $allowedfields, true)) {
-                        throw new coding_exception('Invalid closing date field');
-                    }
-                    $moduletable = $allowedtables[$moduletable];
                     $sql4 = "
                         INSERT INTO {logstore_socialflow_closing_temp} (hitid, closingdate)
                         SELECT DISTINCT h.id AS hitid, mt.$closingdatefield AS closingdate
