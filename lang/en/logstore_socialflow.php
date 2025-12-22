@@ -30,35 +30,26 @@ $string['configloglifetime_descr'] = 'This specifies the length of time you want
 
 $string['loglifetime'] = 'Keep logs for';
 
-
-
-
 $string['pluginname'] = 'Social Flow Log';
 
 $string['privacy:metadata'] = 'This plugin does store some personal data.';
-$string['privacy:metadata:contextid'] =
-    'The context in which the logged event occurred.';
-$string['privacy:metadata:courseid'] =
-    'The course associated with the logged event.';
+$string['privacy:metadata:contextid'] = 'The context in which the logged event occurred.';
+$string['privacy:metadata:courseid'] = 'The course associated with the logged event.';
 $string['privacy:metadata:log'] = 'A collection of past events';
 $string['privacy:metadata:log:eventid'] = 'The event id';
 $string['privacy:metadata:log:timecreated'] = 'The time when the event occurred';
 $string['privacy:metadata:log:userid'] = 'The ID of the user who triggered this event';
-$string['privacy:metadata:logstore'] =
-    'This plugin stores log data related to user interactions with SocialFlow activities.';
-$string['privacy:metadata:userid'] =
-    'The ID of the user who triggered the logged event.';
+$string['privacy:metadata:logstore'] = 'This plugin stores log data related to user interactions with SocialFlow activities.';
+$string['privacy:metadata:userid'] = 'The ID of the user who triggered the logged event.';
 
 $string['setting_course_ids'] = 'course_ids';
 $string['setting_course_ids_descr'] = 'To be used with the log_scope option "include" or "exclude" to only track specific courses. Example: <code>10,153,102</code>.';
-
 
 $string['setting_log_scope'] = 'log_scope';
 $string['setting_log_scope_all'] = 'Log events in all courses';
 $string['setting_log_scope_descr'] = 'Defines the scope of the logging process. By default, all courses are logged.';
 $string['setting_log_scope_exclude'] = 'Log events EXCLUDING the courses specified via course_ids below';
 $string['setting_log_scope_include'] = 'Log events only in courses specified via course_ids below';
-
 
 $string['setting_nontracking_roles'] = 'nontracking_roles';
 $string['setting_nontracking_roles_descr'] = 'Define which roles should <strong>not</strong> be tracked (blacklist). This is useful if you don\'t want to track specific roles (like managers or teachers). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, all roles are tracked. Example: <code>teacher,editingteacher,manager</code>. This settings has priority over <code>tracking_roles</code>.';
