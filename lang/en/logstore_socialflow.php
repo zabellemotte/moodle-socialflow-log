@@ -59,10 +59,24 @@ $string['setting_nontracking_roles_descr'] = 'Define which roles should <strong>
 $string['setting_tracking_roles'] = 'tracking_roles';
 $string['setting_tracking_roles_descr'] = 'Define which roles should be tracked (whitelist). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, only student role is tracked. Example: <code>student,guest</code>';
 
-
-
-
-
 $string['taskcleanup'] = 'Socialflow log table cleanup';
 $string['taskhits'] = 'Refreshing socialflow hits informations';
 $string['tasknbpa'] = 'Refreshing socialflow number of participants information';
+
+$string['privacy:metadata:logstore'] =
+    'This plugin stores log data related to user interactions with SocialFlow activities.';
+
+$string['privacy:metadata:userid'] =
+    'The ID of the user who triggered the logged event.';
+
+$string['privacy:metadata:contextid'] =
+    'The context in which the logged event occurred.';
+
+$string['privacy:metadata:courseid'] =
+    'The course associated with the logged event.';
+
+$string['privacy:metadata:timecreated'] =
+    'The time when the logged event was recorded.';
+
+$string['privacy:metadata:eventid'] =
+    'The identifier of the event definition associated with the log entry.';
