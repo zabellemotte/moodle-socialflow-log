@@ -35,12 +35,19 @@ $string['loglifetime'] = 'Keep logs for';
 
 $string['pluginname'] = 'Social Flow Log';
 
-$string['privacy:metadata'] = 'This plugin does not store any personal data. All data is logged and stored anonymously.';
+$string['privacy:metadata'] = 'This plugin does store some personal data.';
+$string['privacy:metadata:contextid'] =
+    'The context in which the logged event occurred.';
+$string['privacy:metadata:courseid'] =
+    'The course associated with the logged event.';
 $string['privacy:metadata:log'] = 'A collection of past events';
 $string['privacy:metadata:log:eventid'] = 'The event id';
 $string['privacy:metadata:log:timecreated'] = 'The time when the event occurred';
 $string['privacy:metadata:log:userid'] = 'The ID of the user who triggered this event';
-
+$string['privacy:metadata:logstore'] =
+    'This plugin stores log data related to user interactions with SocialFlow activities.';
+$string['privacy:metadata:userid'] =
+    'The ID of the user who triggered the logged event.';
 
 $string['setting_course_ids'] = 'course_ids';
 $string['setting_course_ids_descr'] = 'To be used with the log_scope option "include" or "exclude" to only track specific courses. Example: <code>10,153,102</code>.';
@@ -63,17 +70,7 @@ $string['taskcleanup'] = 'Socialflow log table cleanup';
 $string['taskhits'] = 'Refreshing socialflow hits informations';
 $string['tasknbpa'] = 'Refreshing socialflow number of participants information';
 
-$string['privacy:metadata:logstore'] =
-    'This plugin stores log data related to user interactions with SocialFlow activities.';
 
-$string['privacy:metadata:userid'] =
-    'The ID of the user who triggered the logged event.';
-
-$string['privacy:metadata:contextid'] =
-    'The context in which the logged event occurred.';
-
-$string['privacy:metadata:courseid'] =
-    'The course associated with the logged event.';
 
 $string['privacy:metadata:timecreated'] =
     'The time when the logged event was recorded.';
