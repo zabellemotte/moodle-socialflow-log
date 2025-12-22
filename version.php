@@ -28,8 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'logstore_socialflow';
 
-$plugin->version = 2025122202;
-$plugin->release = 'v1.0.6';
+$plugin->version = 2025122203;
+$plugin->release = 'v1.0.7';
 $plugin->maturity = MATURITY_STABLE;
 
 $plugin->requires = 2017111302;
