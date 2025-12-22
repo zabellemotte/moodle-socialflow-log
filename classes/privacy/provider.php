@@ -102,7 +102,7 @@ class provider implements
         $userid = $contextlist->get_user()->id;
         $contextids = $contextlist->get_contextids();
 
-        list($insql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
+        [$insql, $params] = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
         $params['userid'] = $userid;
         $sql = "
             SELECT l.contextid,
@@ -143,7 +143,7 @@ class provider implements
         $userid = $contextlist->get_user()->id;
         $contextids = $contextlist->get_contextids();
 
-        list($insql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
+        [$insql, $params] = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
         $params['userid'] = $userid;
 
         $DB->execute(
