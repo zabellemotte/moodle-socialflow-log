@@ -187,15 +187,40 @@ class hits_task extends \core\task\scheduled_task {
                     $closingdatefield = $row->closingdatefield;
                     // In core plugins, the default value for closing date field is zero.
                     // But in additionnal plugins, default value is sometimes null.
-                    $sql4 = "INSERT INTO {logstore_socialflow_closing_temp} (hitid,closingdate)
-                                 SELECT DISTINCT h.id AS hitid,mt." . $closingdatefield . "
-                                 AS closingdate FROM {logstore_socialflow_hits} h
-                                 INNER JOIN {logstore_socialflow_evts} evts ON h.eventid =" . $eventid . "
-                                 INNER JOIN {context} c ON h.contextid = c.id
-                                 INNER JOIN {course_modules} cm ON c.instanceid = cm.id
-                                 INNER JOIN {" . $moduletable . "} mt ON cm.instance=mt.id
-                                 WHERE (mt." . $closingdatefield . " IS NOT NULL) AND (mt." . $closingdatefield . " > 0)";
-                    $result4 = $DB->execute($sql4);
+                    $allowedtables = [
+                        'assign' => 'assign',
+                        'quiz'   => 'quiz',
+                    ];
+                    $allowedfields = [
+                        'duedate',
+                        'timeclose',
+                    ];
+                    if (!array_key_exists($moduletable, $allowedtables)) {
+                        throw new coding_exception('Invalid module table');
+                    }
+                    if (!in_array($closingdatefield, $allowedfields, true)) {
+                        throw new coding_exception('Invalid closing date field');
+                    }
+                    $moduletable = $allowedtables[$moduletable];
+                    $sql4 = "
+                        INSERT INTO {logstore_socialflow_closing_temp} (hitid, closingdate)
+                        SELECT DISTINCT h.id AS hitid, mt.$closingdatefield AS closingdate
+                          FROM {logstore_socialflow_hits} h
+                          JOIN {logstore_socialflow_evts} evts
+                              ON h.eventid = :eventid
+                          JOIN {context} c
+                              ON h.contextid = c.id
+                          JOIN {course_modules} cm
+                              ON c.instanceid = cm.id
+                          JOIN {{$moduletable}} mt
+                              ON cm.instance = mt.id
+                         WHERE mt.$closingdatefield IS NOT NULL
+                           AND mt.$closingdatefield > 0
+                    ";
+                    $params4 = [
+                        'eventid' => $eventid,
+                    ];
+                    $result4 = $DB->execute($sql4, $params4);
                     if (!$result4) {
                         die("error on temp closing table insert");
                     }

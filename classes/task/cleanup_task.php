@@ -57,12 +57,21 @@ class cleanup_task extends \core\task\scheduled_task {
         // As long as a there are events linked to a contextid during the loglifetime ...
         // Data is preserved to be able to indicate user if he had an action linked to this contextid.
         // Even if this action is outside the loglifetime.
-        $olddata = $DB->get_records_sql(
-            "SELECT id FROM {logstore_socialflow_log} WHERE timecreated <= $loglifetime
-             AND contextid NOT IN (SELECT DISTINCT contextid
-                                FROM {logstore_socialflow_log}
-                                WHERE timecreated > $loglifetime)"
-        );
+        $sql = "
+            SELECT id
+              FROM {logstore_socialflow_log}
+             WHERE timecreated <= :loglifetime
+               AND contextid NOT IN (
+            SELECT DISTINCT contextid
+              FROM {logstore_socialflow_log}
+             WHERE timecreated > :loglifetime2
+             )
+        ";
+        $params = [
+            'loglifetime'  => $loglifetime,
+            'loglifetime2' => $loglifetime,
+        ];
+        $olddata = $DB->get_records_sql($sql, $params);
         if ($olddata) {
             $ids = [];
             foreach ($olddata as $row) {

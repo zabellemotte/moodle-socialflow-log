@@ -76,17 +76,39 @@ class nbpa_task extends \core\task\scheduled_task {
         // That is updated via this nbpa crontask.
         foreach ($result2 as $row) {
             $courseid = $row->courseid;
-            $sql3 = "SELECT COUNT(DISTINCT(u.id)) AS nbpa
-                         FROM {user} u
-                         INNER JOIN {user_enrolments} ue ON ue.userid = u.id
-                         INNER JOIN {enrol} e ON e.id = ue.enrolid
-                         INNER JOIN {role_assignments} ra ON ra.userid = u.id
-                         INNER JOIN {context} ct ON ct.id = ra.contextid AND ct.contextlevel = 50
-                         INNER JOIN {course} c ON c.id = ct.instanceid AND e.courseid = c.id
-                         INNER JOIN {role} r ON r.id = ra.roleid  AND r.shortname = 'student'
-                         WHERE e.status = 0 AND u.suspended = 0 AND u.deleted = 0 AND (ue.timeend = 0 OR ue.timeend > $now)
-                         AND ue.status = 0 AND c.id = $courseid";
-            $result3 = $DB->get_record_sql($sql3);
+            $sql3 = "
+                SELECT COUNT(DISTINCT u.id) AS nbpa
+                  FROM {user} u
+                  JOIN {user_enrolments} ue ON ue.userid = u.id
+                  JOIN {enrol} e ON e.id = ue.enrolid
+                  JOIN {role_assignments} ra ON ra.userid = u.id
+                  JOIN {context} ct
+                      ON ct.id = ra.contextid
+                     AND ct.contextlevel = :contextlevel
+                  JOIN {course} c
+                      ON c.id = ct.instanceid
+                     AND e.courseid = c.id
+                  JOIN {role} r
+                      ON r.id = ra.roleid
+                     AND r.shortname = :roleshortname
+                 WHERE e.status = :enrolstatus
+                   AND ue.status = :uestatus
+                   AND u.suspended = :suspended
+                   AND u.deleted = :deleted
+                   AND (ue.timeend = 0 OR ue.timeend > :now)
+                   AND c.id = :courseid
+            ";
+            $params3 = [
+                'contextlevel'  => CONTEXT_COURSE,
+                'roleshortname' => 'student',
+                'enrolstatus'   => 0,
+                'uestatus'      => 0,
+                'suspended'     => 0,
+                'deleted'       => 0,
+                'now'           => $now,
+                'courseid'      => $courseid,
+            ];
+            $result3 = $DB->get_record_sql($sql3, $params3);
             if (!$result3) {
                 die("nbpa computation impossible");
             }
