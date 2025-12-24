@@ -52,7 +52,7 @@ $string['setting_log_scope_exclude'] = 'Log events EXCLUDING the courses specifi
 $string['setting_log_scope_include'] = 'Log events only in courses specified via course_ids below';
 
 $string['setting_nontracking_roles'] = 'nontracking_roles';
-$string['setting_nontracking_roles_descr'] = 'Define which roles should <strong>not</strong> be tracked (blacklist). This is useful if you don\'t want to track specific roles (like managers or teachers). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, all roles are tracked. Example: <code>teacher,editingteacher,manager</code>. This settings has priority over <code>tracking_roles</code>.';
+$string['setting_nontracking_roles_descr'] = 'Define which roles should <strong>not</strong> be tracked (blacklist). This is useful if you don\'t want to track specific roles (like managers or teachers). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, only "student" role is tracked. Example: <code>teacher,editingteacher,manager</code>. This settings has priority over <code>tracking_roles</code>.';
 
 $string['setting_tracking_roles'] = 'tracking_roles';
 $string['setting_tracking_roles_descr'] = 'Define which roles should be tracked (whitelist). Specify the role by using the "shortname" (can be found via <em>Site Administration</em> -> <em>Users</em> tab -> <em>Permissions</em> category -> <em>Define roles</em>). By default, only student role is tracked. Example: <code>student,guest</code>';
