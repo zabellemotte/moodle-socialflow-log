@@ -35,6 +35,7 @@ The Social Flow view is based on two plugins:
 
 ## Download
 First, download and install the [last official version of plugin logstore_socialflow](https://moodle.org/plugins/logstore_socialflow). 
+
 Afterwards, install the [last official version of plugin block_socialflow](https://moodle.org/plugins/block_socialflow).
 
 ## Cutomize the logged events
